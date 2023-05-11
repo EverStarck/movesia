@@ -1,20 +1,5 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Redirect } from "expo-router";
 
-const Home = () => {
-  return (
-    <View style={styles.container}>
-      <Text>Home</Text>
-    </View>
-  );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
-
-export default Home;
+export default function Index() {
+  return <Redirect href="/home" />;
+}
