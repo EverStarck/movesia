@@ -6,12 +6,16 @@ import {
   Text,
   View,
 } from "react-native";
+import { useContext } from "react";
 import { Stack, useRouter, useSearchParams } from "expo-router";
 
 import tw from "@/lib/tw";
+import { MoviesContext } from "@/context/movies";
 
 const Movie = () => {
   const { id } = useSearchParams();
+  const { movies, setMovies } = useContext(MoviesContext);
+  console.log("here", id, movies);
 
   return (
     <SafeAreaView
