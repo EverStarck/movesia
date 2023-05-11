@@ -1,17 +1,21 @@
+const { plugin } = require("twrnc");
 // const { fontFamily } = require("tailwindcss/defaultTheme");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
   content: ["app/**/*.{ts,tsx}", "components/**/*.{ts,tsx}"],
+  plugins: [
+    plugin(({ addUtilities }) => {
+      addUtilities({
+        container: {
+          center: true,
+          padding: 32,
+        },
+      });
+    }),
+  ],
   theme: {
-    container: {
-      center: true,
-      padding: "2rem",
-      screens: {
-        "2xl": "1400px",
-      },
-    },
     extend: {
       colors: {
         border: "#292929",
