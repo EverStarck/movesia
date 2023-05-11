@@ -6,7 +6,8 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "format:write": "prettier --write \"**/*.{ts,tsx,mdx}\" --cache"
   },
   "overrides": {
     "metro": "0.76.0",
@@ -37,9 +38,11 @@
   "devDependencies": {
     "@babel/core": "^7.21.8",
     "@babel/plugin-proposal-export-namespace-from": "^7.18.9",
+    "@ianvs/prettier-plugin-sort-imports": "^3.7.2",
     "@types/react": "~18.2.6",
+    "babel-plugin-module-resolver": "^5.0.0",
+    "prettier": "^2.7.1",
     "typescript": "^5.0.4"
-
   },
   "private": true
 }
