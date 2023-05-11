@@ -7,6 +7,7 @@ module.exports = {
   trailingComma: "es5",
   importOrder: [
     "^(react-native/(.*)$)|^(react-native$)",
+    "^(react/(.*)$)|^(react$)",
     "<THIRD_PARTY_MODULES>",
     "",
     "^types$",
@@ -14,6 +15,7 @@ module.exports = {
     "^@/config/(.*)$",
     "^@/lib/(.*)$",
     "^@/hooks/(.*)$",
+    "^@/context/(.*)$",
     "^@/components/ui/(.*)$",
     "^@/components/(.*)$",
     "^@/styles/(.*)$",
