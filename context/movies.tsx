@@ -1,9 +1,11 @@
 import React from "react";
 
+import { RecommendData } from "@/types/recommend";
+
 // TODO: Fix types
 type MoviesContextProps = {
-  movies: [];
-  setMovies: (movies: []) => void;
+  movies: RecommendData[];
+  setMovies: React.Dispatch<React.SetStateAction<RecommendData[]>>;
 };
 export const MoviesContext = React.createContext({} as MoviesContextProps);
 
@@ -12,7 +14,7 @@ export function useMovies() {
 }
 
 export function MoviesProvider({ children }: { children: React.ReactNode }) {
-  const [movies, setMovies] = React.useState([]);
+  const [movies, setMovies] = React.useState<RecommendData[]>([]);
 
   return (
     <MoviesContext.Provider

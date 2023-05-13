@@ -1,13 +1,16 @@
 import { Text, View } from "react-native";
-import { useRouter } from "expo-router";
 import React, { useState } from "react";
+import { useRouter } from "expo-router";
 import { Dropdown } from "react-native-element-dropdown";
 
 import tw from "@/lib/tw";
 
 const data = [
-  { label: "AItem 1", value: "1" },
-  { label: "BItem 2", value: "2" },
+  { label: "Avatar", value: "Avatar" },
+  {
+    label: "Pirates of the Caribbean: At World's End",
+    value: "Pirates of the Caribbean: At World's End",
+  },
   { label: "CItem 3", value: "3" },
   { label: "DCItem 4", value: "4" },
   { label: "EItem 5", value: "5" },
