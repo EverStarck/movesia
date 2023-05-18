@@ -1,11 +1,11 @@
 import React from "react";
 
-import { RecommendData } from "@/types/recommend";
+import { Datum } from "@/types/recommend";
 
 // TODO: Fix types
 type MoviesContextProps = {
-  movies: RecommendData[];
-  setMovies: React.Dispatch<React.SetStateAction<RecommendData[]>>;
+  movies: { [key: string]: Datum };
+  setMovies: React.Dispatch<React.SetStateAction<{ [key: string]: Datum }>>;
 };
 export const MoviesContext = React.createContext({} as MoviesContextProps);
 
@@ -14,7 +14,7 @@ export function useMovies() {
 }
 
 export function MoviesProvider({ children }: { children: React.ReactNode }) {
-  const [movies, setMovies] = React.useState<RecommendData[]>([]);
+  const [movies, setMovies] = React.useState<{ [key: string]: Datum }>({});
 
   return (
     <MoviesContext.Provider
