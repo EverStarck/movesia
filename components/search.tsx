@@ -3,22 +3,10 @@ import React, { useState } from "react";
 import { useRouter } from "expo-router";
 import { Dropdown } from "react-native-element-dropdown";
 
+import moviesList from "@/lib/movies";
 import tw from "@/lib/tw";
 
-const data = [
-  { label: "Avatar", value: "Avatar" },
-  {
-    label: "Pirates of the Caribbean: At World's End",
-    value: "Pirates of the Caribbean: At World's End",
-  },
-  { label: "CItem 3", value: "3" },
-  { label: "DCItem 4", value: "4" },
-  { label: "EItem 5", value: "5" },
-  { label: "FItem 6", value: "6" },
-  { label: "GItem 7", value: "7" },
-  { label: "HItem 8", value: "8" },
-];
-
+const data = moviesList;
 type Data = (typeof data)[0];
 
 export function Search() {
@@ -30,7 +18,7 @@ export function Search() {
       <View style={tw`flex-row justify-between items-center p-4`}>
         <Text
           style={tw.style(
-            item.value === value ? "text-foreground" : "text-muted-foreground"
+            item.value == value ? "text-foreground" : "text-muted-foreground"
           )}
         >
           {item.label}
