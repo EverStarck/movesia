@@ -26,6 +26,7 @@ module.exports = {
         myBlue: "#148eff",
         myGreen: "#16ca49",
         myOrange: "#ffa12e",
+        myYellow: "#FF9F2D",
         primary: {
           DEFAULT: "​#000000",
           foreground: "#ffffff",
