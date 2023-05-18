@@ -37,7 +37,8 @@
     "react-native-svg": "13.4.0",
     "react-native-web": "~0.18.10",
     "twrnc": "^3.6.0",
-    "typescript": "^4.9.4"
+    "typescript": "^4.9.4",
+    "expo-linear-gradient": "~12.1.2"
   },
   "devDependencies": {
     "@babel/core": "^7.21.8",
