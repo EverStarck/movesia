@@ -43,7 +43,7 @@ export function Poster({ id, ...props }: PosterProps) {
             </View>
             {/* Info */}
             <View
-              style={tw`flex-1 flex-column items-center justify-end mb-8 gap-4`}
+              style={tw`flex-1 flex-column items-center justify-end mb-28 gap-4`}
             >
               <Text style={tw`text-foreground text-2xl font-bold`}>
                 {movie.title}
