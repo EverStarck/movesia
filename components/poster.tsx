@@ -1,7 +1,16 @@
-import { ImageBackground, Text, View, ViewProps } from "react-native";
+import {
+  ImageBackground,
+  Platform,
+  StatusBar,
+  Text,
+  TouchableOpacity,
+  View,
+  ViewProps,
+} from "react-native";
 import * as React from "react";
 import { LinearGradient } from "expo-linear-gradient";
-import { Link } from "expo-router";
+import { useRouter } from "expo-router";
+import { getColors } from "react-native-image-colors";
 
 import tw from "@/lib/tw";
 import { genres, mins2hours } from "@/lib/utils";
@@ -13,12 +22,15 @@ interface PosterProps extends Partial<ViewProps> {
 }
 
 export function Poster({ id, ...props }: PosterProps) {
+  const router = useRouter();
   const { movies } = React.useContext(MoviesContext);
   console.log("🚀 ~ file: poster.tsx:16 ~ Poster ~ movies:", movies);
   const movie = movies[id];
   console.log("🚀 ~ file: poster.tsx:15 ~ Poster ~ movie:", movie);
+
   return (
     <View style={tw`h-7/12`}>
+      <StatusBar animated={true} barStyle="light-content" />
       <ImageBackground
         source={{ uri: movie.tmdb.data.full_path }}
         style={tw`w-screen h-full`}
@@ -32,20 +44,32 @@ export function Poster({ id, ...props }: PosterProps) {
             style={tw`w-full h-full`}
           >
             {/* Header */}
-            <View style={tw`flex-row justify-between items-center p-4`}>
-              <Link href="/home">
+            <View
+              style={tw.style(`flex-row justify-between items-center pl-8`, {
+                paddingTop:
+                  Platform.OS === "android" ? StatusBar.currentHeight : 0,
+              })}
+            >
+              <TouchableOpacity
+                style={tw.style(`p-1 rounded-full`, {
+                  backgroundColor: "rgba(0,0,0,0.7)",
+                })}
+                onPress={() => {
+                  router.back();
+                }}
+              >
                 <Icons.back
                   size={24}
-                  color={tw.color("background")}
-                  style={tw`p-1 rounded-full border-solid border border-muted`}
+                  color={tw.color("foreground")}
+                  // style={tw`p-1 rounded-full border-solid border border-muted`}
                 />
-              </Link>
+              </TouchableOpacity>
             </View>
             {/* Info */}
             <View
               style={tw`flex-1 flex-column items-center justify-end mb-28 gap-4`}
             >
-              <Text style={tw`text-foreground text-2xl font-bold`}>
+              <Text style={tw`text-foreground text-2xl font-bold text-center`}>
                 {movie.title}
               </Text>
 
