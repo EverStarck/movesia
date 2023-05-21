@@ -23,6 +23,7 @@ module.exports = {
         ring: "#1d283a",
         background: "#000000",
         foreground: "#ffffff",
+        myRed: "#F74141",
         myBlue: "#148eff",
         myGreen: "#16ca49",
         myOrange: "#ffa12e",
