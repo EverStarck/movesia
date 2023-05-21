@@ -1,20 +1,11 @@
-import {
-  FlatList,
-  GestureResponderEvent,
-  Text,
-  View,
-  ViewProps,
-} from "react-native";
+import { FlatList, Text, View, ViewProps } from "react-native";
 import * as React from "react";
-import ReadMore from "@fawazahmed/react-native-read-more";
-import { Link } from "expo-router";
 
 import { Datum } from "@/types/recommend";
 import tw from "@/lib/tw";
 import { MoviesContext } from "@/context/movies";
-import { Icons } from "@/components/icons";
 import { Movie } from "@/components/movie";
-import { Poster } from "@/components/poster";
+import { MoreLessComponent } from "@/components/read-more";
 
 interface InfoProps extends Partial<ViewProps> {
   id: string;
@@ -25,33 +16,42 @@ export function Info({ id, ...props }: InfoProps) {
   console.log("🚀 ~ file: poster.tsx:16 ~ Poster ~ movies:", movies);
   const movie = movies[id];
   console.log("🚀 ~ file: poster.tsx:15 ~ Poster ~ movie:", movie);
-
-  const renderItem = ({ item }: { item: Datum }) => {
-    if (item.movie_id === Number(id)) return;
-
-    return <Movie movie={item} />;
-  };
+  const [clippedText, setClippedText] = React.useState<string>("");
 
   return (
     <View
-      style={tw.style("flex-1 flex-column gap-2 px-8", {
+      style={tw.style("flex-1 flex-column px-8", {
         marginTop: -50,
       })}
     >
-      <Text style={tw`text-foreground text-xl font-semibold`}>About</Text>
+      <View style={tw`gap-2`}>
+        <Text style={tw`text-foreground text-xl font-semibold`}>About</Text>
 
-      <ReadMore
-        numberOfLines={3}
-        style={tw`text-muted-foreground`}
-        seeMoreText="Read More"
-        seeMoreStyle={tw`text-myRed`}
-        seeLessText="Read Less"
-        seeLessStyle={tw`text-myRed`}
-      >
-        {movie.tmdb.data.overview}
-      </ReadMore>
+        {clippedText ? (
+          <MoreLessComponent
+            truncatedText={clippedText}
+            fullText={movie.tmdb.data.overview}
+          />
+        ) : (
+          <Text
+            numberOfLines={3}
+            ellipsizeMode={"tail"}
+            style={tw`text-muted-foreground`}
+            onTextLayout={(event) => {
+              const { lines } = event.nativeEvent;
+              let text = lines
+                .splice(0, 3)
+                .map((line) => line.text)
+                .join("");
+              setClippedText(text.substr(0, text.length - 9));
+            }}
+          >
+            {movie.tmdb.data.overview}
+          </Text>
+        )}
+      </View>
 
-      <View style={tw`mt-8`}>
+      <View style={tw`mt-8 gap-2`}>
         <Text style={tw`text-foreground text-xl font-semibold`}>
           Similar Movies
         </Text>
@@ -59,7 +59,12 @@ export function Info({ id, ...props }: InfoProps) {
           // This is getting all the state movies and not only the ones that are similar
           data={Object.values(movies)}
           keyExtractor={(item) => String(item.movie_id)}
-          renderItem={renderItem}
+          renderItem={({ item }: { item: Datum }) => {
+            if (item.movie_id === Number(id)) return null;
+
+            return <Movie movie={item} />;
+          }}
+          contentContainerStyle={tw`flex gap-5`}
           horizontal
         />
       </View>
