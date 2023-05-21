@@ -73,7 +73,7 @@ export function Poster({ id, ...props }: PosterProps) {
                 {movie.title}
               </Text>
 
-              <View style={tw`flex flex-row gap-1`}>
+              <View style={tw`flex flex-row gap-1 items-center`}>
                 <Icons.star
                   size={16}
                   color={tw.color("myYellow")}
