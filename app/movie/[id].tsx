@@ -14,6 +14,7 @@ import { Recommend } from "@/types/recommend";
 import tw from "@/lib/tw";
 import { MoviesContext } from "@/context/movies";
 import { Icons } from "@/components/icons";
+import { Info } from "@/components/info";
 import { Poster } from "@/components/poster";
 
 const Movie = () => {
@@ -21,9 +22,6 @@ const Movie = () => {
   const { movies, setMovies } = useContext(MoviesContext);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
-
-  console.log("🚀 ~ file: [id].tsx:21 ~ Movie ~ id:", id);
-
   async function fetchMovie() {
     // Check movie exists in context
     console.log("here", id, movies);
@@ -35,11 +33,7 @@ const Movie = () => {
           "Content-Type": "application/json",
         },
       });
-      console.log("🚀 ~ file: [name].tsx:31 ~ fetchMovie ~ res:", res);
-
       const data: Recommend = await res.json();
-      console.log("🚀 ~ file: [id].tsx:41 ~ fetchMovie ~ data:", data);
-
       if (data.error) {
         setError(data.message);
         return;
@@ -49,7 +43,6 @@ const Movie = () => {
       setLoading(false);
       setError("");
     } catch (error: any) {
-      console.log("🚀 ~ file: [name].tsx:49 ~ fetchMovie ~ error:", error);
       setError(error.message);
     }
   }
@@ -62,7 +55,6 @@ const Movie = () => {
   if (!id || typeof id !== "string") return;
 
   if (error) {
-    console.log("🚀 ~ file: [id].tsx:58 ~ Movie ~ error:", error);
     return (
       <View style={tw`flex-1 bg-background justify-center items-center`}>
         <Text style={tw`text-foreground`}>{error}</Text>
@@ -91,11 +83,10 @@ const Movie = () => {
           </View>
         )}
 
-        {console.log("🚀 ~ file: [id].tsx:92 ~ Movie ~ loading:", loading)}
-        {console.log("🚀 ~ file: [id].tsx:98 ~ Movie ~ error:", error)}
         {!loading && error === "" && (
           <>
             <Poster id={id} />
+            <Info id={id} />
             <Text style={tw`text-white`}>{id}</Text>
           </>
         )}
