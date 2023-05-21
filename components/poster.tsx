@@ -10,7 +10,6 @@ import {
 import * as React from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
-import { getColors } from "react-native-image-colors";
 
 import tw from "@/lib/tw";
 import { genres, mins2hours } from "@/lib/utils";

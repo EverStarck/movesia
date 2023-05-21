@@ -1,5 +1,5 @@
 import { Text, View } from "react-native";
-import React, { useState } from "react";
+import * as React from "react";
 import { useRouter } from "expo-router";
 import { Dropdown } from "react-native-element-dropdown";
 
@@ -11,7 +11,7 @@ type Data = (typeof data)[0];
 
 export function Search() {
   const router = useRouter();
-  const [value, setValue] = useState<string>("");
+  const [value, setValue] = React.useState<string>("");
 
   const renderItem = (item: Data) => {
     return (

@@ -1,8 +1,7 @@
-import React from "react";
+import * as React from "react";
 
 import { Datum } from "@/types/recommend";
 
-// TODO: Fix types
 type MoviesContextProps = {
   movies: { [key: string]: Datum };
   setMovies: React.Dispatch<React.SetStateAction<{ [key: string]: Datum }>>;

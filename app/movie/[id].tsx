@@ -1,14 +1,7 @@
-import {
-  Platform,
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  Text,
-  View,
-} from "react-native";
-import { useContext, useEffect, useState } from "react";
+import { SafeAreaView, ScrollView, Text, View } from "react-native";
+import * as React from "react";
 import { API_URL } from "@env";
-import { Stack, useRouter, useSearchParams } from "expo-router";
+import { Stack, useSearchParams } from "expo-router";
 
 import { Recommend } from "@/types/recommend";
 import tw from "@/lib/tw";
@@ -19,9 +12,9 @@ import { Poster } from "@/components/poster";
 
 const Movie = () => {
   const { id } = useSearchParams();
-  const { movies, setMovies } = useContext(MoviesContext);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string>("");
+  const { movies, setMovies } = React.useContext(MoviesContext);
+  const [loading, setLoading] = React.useState<boolean>(true);
+  const [error, setError] = React.useState<string>("");
   async function fetchMovie() {
     // Check movie exists in context
     console.log("here", id, movies);
@@ -47,7 +40,7 @@ const Movie = () => {
     }
   }
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (id === undefined) return;
     fetchMovie();
   }, [id]);
