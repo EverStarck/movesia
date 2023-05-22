@@ -13,6 +13,7 @@ export interface Datum {
   tmdb: Tmdb;
   vote_average: number;
   vote_count: number;
+  recommended: number[] | [];
 }
 
 export interface Tmdb {
