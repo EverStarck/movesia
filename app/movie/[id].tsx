@@ -12,27 +12,42 @@ import { Poster } from "@/components/poster";
 
 const Movie = () => {
   const { id } = useSearchParams();
-  const { movies, setMovies } = React.useContext(MoviesContext);
+  const { movies, setMoviesWithoutUpdateRecom, setRecomMovie } =
+    React.useContext(MoviesContext);
   const [loading, setLoading] = React.useState<boolean>(true);
   const [error, setError] = React.useState<string>("");
-  async function fetchMovie() {
-    // Check movie exists in context
-    console.log("here", id, movies);
+
+  async function fetchMovie(onlyRecommended = false) {
     try {
-      const res = await fetch(`${API_URL}/recommend?movie=${id}`, {
-        method: "GET",
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
-        },
-      });
+      console.log(
+        "FETCH",
+        `${API_URL}/recommend?movie=${id}${
+          onlyRecommended ? "&recommended" : ""
+        }`
+      );
+      const res = await fetch(
+        `${API_URL}/recommend?movie=${id}${
+          onlyRecommended ? "&recommended" : ""
+        }`,
+        {
+          method: "GET",
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+          },
+        }
+      );
       const data: Recommend = await res.json();
       if (data.error) {
         setError(data.message);
         return;
       }
 
-      setMovies({ ...movies, ...data.data });
+      if (onlyRecommended) {
+        setRecomMovie(data.data, id as string);
+      } else {
+        setMoviesWithoutUpdateRecom(data.data);
+      }
       setLoading(false);
       setError("");
     } catch (error: any) {
@@ -42,6 +57,20 @@ const Movie = () => {
 
   React.useEffect(() => {
     if (id === undefined) return;
+
+    // Movie exists in context
+    if (movies[id as string] && movies[id as string].recommended.length > 0) {
+      setLoading(false);
+      setError("");
+      return;
+    }
+
+    // Fetch only recommended movies
+    if (movies[id as string] && movies[id as string].recommended.length === 0) {
+      fetchMovie(true);
+      return;
+    }
+
     fetchMovie();
   }, [id]);
 
@@ -78,6 +107,7 @@ const Movie = () => {
 
         {!loading && error === "" && (
           <>
+            {/* check movie is found in tmdb*/}
             <Poster id={id} />
             <Info id={id} />
             <Text style={tw`text-white`}>{id}</Text>
