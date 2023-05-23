@@ -1,13 +1,13 @@
 import {
+  ImageBackground,
   Platform,
   SafeAreaView,
-  ScrollView,
   StatusBar,
+  Text,
   View,
 } from "react-native";
 
 import tw from "@/lib/tw";
-import { EmptyPlaceholder } from "@/components/empty-placeholder";
 import { Search } from "@/components/search";
 
 const Home = () => {
@@ -17,26 +17,27 @@ const Home = () => {
         paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
       })}
     >
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={tw`flex-1 bg-background px-8`}
+      <ImageBackground
+        source={require("@/assets/home_background.jpg")}
+        style={tw`w-full h-full bg-opacity-1`}
+        resizeMode="cover"
       >
-        <View style={tw`flex-1 pt-1`}>
-          <Search />
-
-          <View style={tw`flex-1 justify-center`}>
-            <EmptyPlaceholder>
-              <EmptyPlaceholder.Icon name="film" />
-              <EmptyPlaceholder.Title>
-                Search for a movie!
-              </EmptyPlaceholder.Title>
-              <EmptyPlaceholder.Description>
-                Currently, there is no movie selected.
-              </EmptyPlaceholder.Description>
-            </EmptyPlaceholder>
+        <View
+          style={tw.style("flex-1 justify-end px-8", {
+            backgroundColor: "rgba(0,0,0, 0.60)",
+          })}
+        >
+          <Text
+            style={tw`text-foreground font-bold text-3xl leading-relaxed uppercase`}
+          >
+            Explore{"\n"}new{"\n"}treasures{"\n"}with{"\n"}each{"\n"}
+            recommendation
+          </Text>
+          <View style={tw`mb-8 mt-10`}>
+            <Search />
           </View>
         </View>
-      </ScrollView>
+      </ImageBackground>
     </SafeAreaView>
   );
 };

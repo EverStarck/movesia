@@ -18,7 +18,7 @@ export function Search() {
       <View style={tw`flex-row justify-between items-center p-4`}>
         <Text
           style={tw.style(
-            item.value == value ? "text-foreground" : "text-muted-foreground"
+            item.value == value ? "text-foreground font-semibold" : "text-foreground"
           )}
         >
           {item.label}
@@ -34,17 +34,17 @@ export function Search() {
 
   return (
     <Dropdown
-      style={tw`flex w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm`}
-      containerStyle={tw`rounded-md border border-input bg-background px-3 py-2 text-sm`}
-      placeholderStyle={tw`text-muted-foreground`}
+      style={tw`flex w-full rounded-md border border-foreground bg-background px-3 py-2 text-sm`}
+      containerStyle={tw`rounded-md border border-foreground bg-background px-3 py-2 text-sm mb-2`}
+      placeholderStyle={tw`text-foreground`}
       selectedTextStyle={tw`text-foreground`}
-      inputSearchStyle={tw`rounded border-input text-sm bg-accent text-foreground`}
+      inputSearchStyle={tw`rounded border-foreground text-sm bg-accent text-foreground`}
       itemContainerStyle={tw`rounded`}
       activeColor={tw.color("bg-input")}
       itemTextStyle={tw`bg-blue-100`}
       data={data}
       search
-      maxHeight={300}
+      maxHeight={500}
       labelField="label"
       valueField="value"
       placeholder="Search Movie"
