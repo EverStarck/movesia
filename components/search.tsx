@@ -18,7 +18,9 @@ export function Search() {
       <View style={tw`flex-row justify-between items-center p-4`}>
         <Text
           style={tw.style(
-            item.value == value ? "text-foreground font-semibold" : "text-foreground"
+            item.value == value
+              ? "text-foreground font-semibold"
+              : "text-foreground"
           )}
         >
           {item.label}
@@ -34,7 +36,10 @@ export function Search() {
 
   return (
     <Dropdown
-      style={tw`flex w-full rounded-md border border-foreground bg-background px-3 py-2 text-sm`}
+      style={tw.style(
+        `flex w-full rounded-md border border-foreground px-3 py-2 text-sm`,
+        { backgroundColor: "rgba(0,0,0, 0.65)" }
+      )}
       containerStyle={tw`rounded-md border border-foreground bg-background px-3 py-2 text-sm mb-2`}
       placeholderStyle={tw`text-foreground`}
       selectedTextStyle={tw`text-foreground`}
