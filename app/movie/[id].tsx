@@ -1,4 +1,10 @@
-import { SafeAreaView, ScrollView, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  SafeAreaView,
+  ScrollView,
+  Text,
+  View,
+} from "react-native";
 import * as React from "react";
 import { API_URL } from "@env";
 import { Stack, useSearchParams } from "expo-router";
@@ -94,10 +100,7 @@ const Movie = () => {
 
         {loading && (
           <View style={tw`flex-1 justify-center items-center`}>
-            <Icons.spinner
-              style={tw`h-16 w-16 animate-spin`}
-              color={tw.color(`bg-foreground`)}
-            />
+            <ActivityIndicator size="large" color={tw.color(`bg-foreground`)} />
           </View>
         )}
 

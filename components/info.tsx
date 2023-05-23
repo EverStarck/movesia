@@ -1,4 +1,10 @@
-import { FlatList, Text, View, ViewProps } from "react-native";
+import {
+  ActivityIndicator,
+  FlatList,
+  Text,
+  View,
+  ViewProps,
+} from "react-native";
 import * as React from "react";
 
 import { Datum } from "@/types/recommend";
@@ -16,6 +22,8 @@ export function Info({ id, ...props }: InfoProps) {
   const { movies } = React.useContext(MoviesContext);
   const movie = movies[id];
   const [clippedText, setClippedText] = React.useState<string>("");
+
+  const similarMovies = getRecomMoviesArr(movies, Number(id));
 
   return (
     <View
@@ -54,17 +62,23 @@ export function Info({ id, ...props }: InfoProps) {
         <Text style={tw`text-foreground text-xl font-semibold`}>
           Similar Movies
         </Text>
-        <FlatList
-          data={getRecomMoviesArr(movies, Number(id))}
-          keyExtractor={(item) => String(item.movie_id)}
-          renderItem={({ item }: { item: Datum }) => {
-            if (item.movie_id === Number(id)) return null;
+        {similarMovies.length === 0 ? (
+          <View style={tw`h-full justify-center items-center`}>
+            <ActivityIndicator size="large" color={tw.color(`bg-foreground`)} />
+          </View>
+        ) : (
+          <FlatList
+            data={similarMovies}
+            keyExtractor={(item) => String(item.movie_id)}
+            renderItem={({ item }: { item: Datum }) => {
+              if (item.movie_id === Number(id)) return null;
 
-            return <Movie movie={item} />;
-          }}
-          contentContainerStyle={tw`flex gap-5`}
-          horizontal
-        />
+              return <Movie movie={item} />;
+            }}
+            contentContainerStyle={tw`flex gap-5`}
+            horizontal
+          />
+        )}
       </View>
     </View>
   );
