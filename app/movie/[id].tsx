@@ -85,14 +85,10 @@ const Movie = () => {
   }
 
   return (
-    <SafeAreaView
-      style={tw.style(`flex-1`, {
-        // paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
-      })}
-    >
+    <SafeAreaView style={tw`flex-1 bg-background`}>
       <ScrollView
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={tw`flex-1 bg-background`}
+        contentContainerStyle={tw`flex-1`}
       >
         <Stack.Screen options={{ headerShown: false }} />
 
@@ -110,7 +106,6 @@ const Movie = () => {
             {/* check movie is found in tmdb*/}
             <Poster id={id} />
             <Info id={id} />
-            <Text style={tw`text-white`}>{id}</Text>
           </>
         )}
       </ScrollView>

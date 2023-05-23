@@ -19,11 +19,11 @@ export function Info({ id, ...props }: InfoProps) {
 
   return (
     <View
-      style={tw.style("flex-1 flex-column px-8", {
+      style={tw.style("flex-1 flex-column", {
         marginTop: -50,
       })}
     >
-      <View style={tw`gap-2`}>
+      <View style={tw`gap-2 px-8`}>
         <Text style={tw`text-foreground text-xl font-semibold`}>About</Text>
 
         {clippedText ? (
@@ -50,12 +50,11 @@ export function Info({ id, ...props }: InfoProps) {
         )}
       </View>
 
-      <View style={tw`mt-8 gap-2`}>
+      <View style={tw`mt-8 gap-2 pl-8 pb-6`}>
         <Text style={tw`text-foreground text-xl font-semibold`}>
           Similar Movies
         </Text>
         <FlatList
-          // This is getting all the state movies and not only the ones that are similar
           data={getRecomMoviesArr(movies, Number(id))}
           keyExtractor={(item) => String(item.movie_id)}
           renderItem={({ item }: { item: Datum }) => {
