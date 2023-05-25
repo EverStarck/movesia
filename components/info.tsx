@@ -1,6 +1,7 @@
 import {
   ActivityIndicator,
   FlatList,
+  Image,
   Text,
   View,
   ViewProps,
@@ -56,6 +57,14 @@ export function Info({ id, ...props }: InfoProps) {
             {movie.tmdb.data.overview}
           </Text>
         )}
+      </View>
+
+      <View style={tw`mt-8 px-8`}>
+        <Image
+          style={tw`w-full h-9`}
+          source={require("@/assets/ad.png")}
+          resizeMode="contain"
+        />
       </View>
 
       <View style={tw`mt-8 gap-2 pl-8 pb-6`}>
