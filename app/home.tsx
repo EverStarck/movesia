@@ -13,10 +13,9 @@ import { Search } from "@/components/search";
 const Home = () => {
   return (
     <SafeAreaView
-      style={tw.style(`flex-1`, {
-        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
-      })}
+      style={tw.style(`flex-1`)}
     >
+      <StatusBar barStyle="light-content" />
       <ImageBackground
         source={require("@/assets/home_background.jpg")}
         style={tw`w-full h-full bg-opacity-1`}

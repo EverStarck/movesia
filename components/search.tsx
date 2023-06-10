@@ -40,7 +40,7 @@ export function Search() {
         `flex w-full rounded-md border border-foreground px-3 py-2 text-sm`,
         { backgroundColor: "rgba(0,0,0, 0.65)" }
       )}
-      containerStyle={tw`rounded-md border border-foreground bg-background px-3 py-2 text-sm mb-2`}
+      containerStyle={tw`rounded-md border border-foreground bg-background px-3 py-2 text-sm mb-14`}
       placeholderStyle={tw`text-foreground`}
       selectedTextStyle={tw`text-foreground`}
       inputSearchStyle={tw`rounded border-foreground text-sm bg-accent text-foreground`}
