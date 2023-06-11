@@ -28,7 +28,7 @@ export function Info({ id, ...props }: InfoProps) {
 
   return (
     <View
-      style={tw.style("flex-1 flex-column", {
+      style={tw.style("flex-1", {
         marginTop: -50,
       })}
     >

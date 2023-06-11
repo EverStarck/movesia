@@ -4,6 +4,7 @@ import {
   ScrollView,
   Text,
   View,
+  Dimensions
 } from "react-native";
 import * as React from "react";
 import { API_URL } from "@env";
@@ -92,26 +93,31 @@ const Movie = () => {
 
   return (
     <SafeAreaView style={tw`flex-1 bg-background`}>
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={tw`flex-1`}
-      >
-        <Stack.Screen options={{ headerShown: false }} />
+      <Stack.Screen options={{ headerShown: false }} />
 
-        {loading && (
-          <View style={tw`flex-1 justify-center items-center`}>
-            <ActivityIndicator size="large" color={tw.color(`bg-foreground`)} />
-          </View>
-        )}
+      {loading && (
+        <View style={tw`flex-1 justify-center items-center`}>
+          <ActivityIndicator size="large" color={tw.color(`bg-foreground`)} />
+        </View>
+      )}
 
-        {!loading && error === "" && (
-          <>
-            {/* check movie is found in tmdb*/}
-            <Poster id={id} />
+      {!loading && error === "" && (
+        <View
+          style={{
+            flex: 1,
+          }}
+        >
+          {/* check movie is found in tmdb*/}
+          <ScrollView>
+            <View style={{
+              height: Dimensions.get('window').height * 0.7,
+            }}>
+              <Poster id={id} />
+            </View>
             <Info id={id} />
-          </>
-        )}
-      </ScrollView>
+          </ScrollView>
+        </View>
+      )}
     </SafeAreaView>
   );
 };

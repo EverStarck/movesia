@@ -23,12 +23,10 @@ interface PosterProps extends Partial<ViewProps> {
 export function Poster({ id, ...props }: PosterProps) {
   const router = useRouter();
   const { movies } = React.useContext(MoviesContext);
-  console.log("🚀 ~ file: poster.tsx:16 ~ Poster ~ movies:", movies);
   const movie = movies[id];
-  console.log("🚀 ~ file: poster.tsx:15 ~ Poster ~ movie:", movie);
 
   return (
-    <View style={tw`h-7/12`}>
+    <View style={tw`flex-1`}>
       <StatusBar animated={true} barStyle="light-content" />
       <ImageBackground
         source={{ uri: movie.tmdb.data.full_path }}
