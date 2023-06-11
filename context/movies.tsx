@@ -1,5 +1,6 @@
 import * as React from "react";
 
+import structuredClone from "realistic-structured-clone";
 import { Datum, Recommend } from "@/types/recommend";
 
 type MoviesContextProps = {
